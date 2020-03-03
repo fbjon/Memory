@@ -5,8 +5,10 @@ var modeButtons = document.querySelectorAll(".mode");
 var bricks = document.querySelectorAll(".brick");
 var newPicArray;
 var tries = 0;
+var totalTries = 0;
 var firstGuess;
 var secondGuess;
+var header = document.querySelector('h1');
 var picArray = [
     "url(pics/Albert.png)",
     "url(pics/Albert.png)",
@@ -66,18 +68,16 @@ for (var i = 0; i < modeButtons.length; i++) {
 for (var i = 0; i < bricks.length; i++) {
     bricks[i].addEventListener('click', function () {
         if (!this.classList.contains('clicked') && tries <= 1 ) {
-            console.log('click');
             this.style.transition = "background 0.6s"
             this.style.background = newPicArray[this.id];
             this.style.backgroundSize = "cover"
             this.classList.add('clicked');
             tries++;
+            totalTries++
             if(tries === 1){
                 firstGuess = this;
-                console.log(firstGuess);
             } else {
                 secondGuess = this;
-                console.log(secondGuess);
             }
             if(tries === 2 && firstGuess.style.background !== secondGuess.style.background){
                 setTimeout(function(){
@@ -87,6 +87,15 @@ for (var i = 0; i < bricks.length; i++) {
                 }, 2000)
             } else if(tries === 2 && firstGuess.style.background === secondGuess.style.background){
                 tries = 0;
+                var totalClickedImages = 0;
+                for(var i = 0; i < bricks.length; i++){
+                    if(bricks[i].classList.contains('clicked')){
+                        totalClickedImages++;
+                    }
+                    
+                } if(totalClickedImages === numBricks){
+                    header.textContent = `YESSS! You solved the game in ${totalTries/2} tries!`
+                }
             }
         }
 
