@@ -57,6 +57,7 @@ button {
     -webkit-transition: all 0.3s;
     -moz-transition: all 0.3s;
     outline: none;
+    padding: 1px 3px 2px;
 }
 
 button:hover {
