@@ -48,8 +48,8 @@ var picArray = [
     "url(pics/Zebra.png)"
 ]
 
-window.onload = setupBricks(20);
-window.onload = setupPics(20);
+window.onload = setupBricks(12);
+window.onload = setupPics(12);
 
 
 for (var i = 0; i < modeButtons.length; i++) {
