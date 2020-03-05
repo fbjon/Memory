@@ -12,8 +12,8 @@ var header = document.querySelector('h1');
 var picArray = [
     "url(pics/Albert.png)",
     "url(pics/Albert.png)",
-    "url(pics/RobotTrainsKay.jpeg)",
-    "url(pics/RobotTrainsKay.jpeg)",
+    "url(pics/Spiderman.jpg)",
+    "url(pics/Spiderman.jpg)",
     "url(pics/Bello.png)",
     "url(pics/Bello.png)",
     "url(pics/BlixtenMcQueen.jpeg)",
