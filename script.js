@@ -236,6 +236,9 @@ function setupPics(num) {
 function shuffle(array) {
     var currentIndex = array.length, temporaryValue, randomIndex;
 
+    /*
+    Nice to se a proper shuffling algorithm that actually produces a random distribution.
+    */
     // While there remain elements to shuffle...
     while (0 !== currentIndex) {
 
