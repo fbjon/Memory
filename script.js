@@ -1,8 +1,8 @@
 var numBricks = 20;
-var messageDisplay = document.querySelector('#message');
-var resetButton = document.querySelector("#reset");
-var modeButtons = document.querySelectorAll(".mode");
-var bricks = document.querySelectorAll(".brick");
+const messageDisplay = document.querySelector('#message');
+const resetButton = document.querySelector("#reset");
+const modeButtons = document.querySelectorAll(".mode");
+const bricks = document.querySelectorAll(".brick");
 var newPicArray;
 var tries = 0;
 var totalTries = 0;
@@ -67,6 +67,7 @@ for (var i = 0; i < modeButtons.length; i++) {
 //change the background of the clicked div, using the divs id, to corresponding image from randomized array of pics
 for (var i = 0; i < bricks.length; i++) {
     bricks[i].addEventListener('click', function () {
+        //if brick is not yet clicked on and it's the first of the two tries, show picture from newPicArray
         if (!this.classList.contains('clicked') && tries <= 1 ) {
             this.style.transition = "background 0.6s"
             this.style.background = newPicArray[this.id];
@@ -74,17 +75,21 @@ for (var i = 0; i < bricks.length; i++) {
             this.classList.add('clicked');
             tries++;
             totalTries++
+            //if it was the first try, declare var firstGuess
             if(tries === 1){
                 firstGuess = this;
+                //else it must be the secondGuess
             } else {
                 secondGuess = this;
             }
+            //if user clicked an image for the second time and the pictures are not the same, hide them
             if(tries === 2 && firstGuess.style.background !== secondGuess.style.background){
                 setTimeout(function(){
                 firstGuess.style.background = "rgb(190, 190, 36)"; firstGuess.classList.remove('clicked');
                 secondGuess.style.background = "rgb(190, 190, 36)"; secondGuess.classList.remove('clicked');
                 tries = 0;
-                }, 2000)
+                }, 1000)
+                //else if the two pictures match, leave them open and declare tries 0 så user can click again
             } else if(tries === 2 && firstGuess.style.background === secondGuess.style.background){
                 tries = 0;
                 var totalClickedImages = 0;
@@ -115,6 +120,8 @@ resetButton.addEventListener('click', function () {
 })
 
 function setupBricks(num) {
+    header.textContent = "The Memory Game";
+    tries = 0;
     bricks.forEach(function (brick) {
         brick.classList.remove('clicked');
         brick.style.transition = "none"
