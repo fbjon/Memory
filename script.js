@@ -1,11 +1,14 @@
+/*
+Overall: clear writing and good comments.
+*/
 var numBricks = 20;
 const messageDisplay = document.querySelector('#message');
 const resetButton = document.querySelector("#reset");
 const modeButtons = document.querySelectorAll(".mode");
 const bricks = document.querySelectorAll(".brick");
 /*
-Using the 'var' keyword is not a problem in itself, but be aware of the pitfalls. Consider the following (nonsensical) line
-at this point in the code:
+Using the 'var' keyword is not a problem in itself, but be aware of the pitfalls. Consider the following (nonsensical)
+line at this point in the code:
 
 var abcd = numBricks + tries;
 
@@ -13,7 +16,8 @@ Because 'tries' isn't defined until later, we wouldn't expect this to work, howe
 This is because the 'var' keyword causes the variable to exist as if it was defined at the top of the function
 (or file, in this case), but the contents of the variable is still undefined at this point, 'tries' won't be set to 0 
 until two lines below. Therefore the operation numBricks + tries is equivalent to 20 + undefined, which produces NaN.
-Using 'let' would produce an error instead, which almost always makes more sense. However, see caniuse.com/let
+Using 'let' would produce an error instead, which almost always makes more sense, although IE11 has some problems with it.
+See caniuse.com/let
 */
 var newPicArray;
 var tries = 0;
@@ -24,8 +28,8 @@ var header = document.querySelector('h1');
 
 /*
 Neat definition here. A different way to do it could be to have an array of just the picture names
-var pics = ["Albert.jpg", "Spiderman.jpg", ...]
-and from that construct the picArray. This separates the definitions from the implementation details.
+var pics = ["Albert.png", "Spiderman.jpg", ...]
+and from that construct the picArray. This separates the definitions from the implementation details and file locations.
 */
 var picArray = [
     "url(pics/Albert.png)",
@@ -68,17 +72,18 @@ var picArray = [
 
 /*
 This doesn't work as intended, although the bug might not cause problems in this case. The variable window.onload expects 
-to be assigned a function, however this line calls the function and assigns the return value to window.onload.
+to be assigned a function, however this line calls the function first and then assigns the return value to window.onload.
 Since setupBricks(12) returns nothing (i.e. undefined), this is the same as
   window.onload = undefined;
-Normally you'd write window.onload = setupBricks; instead which assigns the function itself to the variable instead of calling it,
-but since setupBricks needs a parameter, you can do it like this:
+Normally you'd write window.onload = setupBricks; instead which assigns the function object instead of
+calling it, but since setupBricks needs a parameter, you can do it like this:
   window.onload = function() { setupBricks(12); };
 */
 window.onload = setupBricks(12);
 /* 
-A second problem: Only one function can be assigned to .onload, so this line overwrites whatever was assigned on the previous line
-(though by chance it doesn't actually matter in this case). Consider combining the calls in one function, or using:
+A second problem: Only one function can be assigned to .onload, so this line overwrites whatever was assigned on the
+previous line (though by chance it doesn't actually matter in this case). Consider combining the calls in one function,
+or using:
   window.addEventListener("load", function(){ setupBricks(12) });
   window.addEventListener("load", function(){ setupPics(12) }); 
 */
@@ -120,6 +125,11 @@ for (var i = 0; i < bricks.length; i++) {
         The UI code on the other hand is the styles, animations, and other visual details which don't affect the game itself.
         By separating out these into other functions, this event listener becomes much shorter and easier to read, and more 
         importantly, easier to test.
+        
+        Sometimes this kind of separation is difficult to do, that's a sign that the level of abstraction in the code
+        doesn't support it, and may need some rewriting/rethinking. 
+        
+        
         */
         //if brick is not yet clicked on and it's the first of the two tries, show picture from newPicArray
         if (!this.classList.contains('clicked') && tries <= 1 ) {
@@ -180,7 +190,7 @@ function setupBricks(num) {
         ...
     };
     You would then only have to write one loop that handles all defined cases using that structure, instead of three different
-    loops as below.
+    loops as below. Less code -> fewer potential bugs. And also, code not written is code that doesn't need to be tested.
     */
     if (num === 12 || num === 16) {
         for (var i = 0; i < bricks.length; i++) {
