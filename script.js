@@ -64,6 +64,18 @@ for (var i = 0; i < modeButtons.length; i++) {
     })
 }
 
+//find out which mode button is selected when reset button is clicked and reset accordingly
+resetButton.addEventListener('click', function () {
+    var selectedButton;
+    modeButtons.forEach(function (button) {
+        if (button.classList.contains('selected')) {
+            selectedButton = button;
+        }
+    })
+    setupBricks(Number(selectedButton.textContent));
+    setupPics(Number(selectedButton.textContent));
+})
+
 //change the background of the clicked div, using the divs id, to corresponding image from randomized array of pics
 for (var i = 0; i < bricks.length; i++) {
     bricks[i].addEventListener('click', function () {
@@ -107,17 +119,6 @@ for (var i = 0; i < bricks.length; i++) {
     })
 }
 
-
-//find out which mode button is selected when reset button is clicked and reset accordingly
-resetButton.addEventListener('click', function () {
-    var selectedButton;
-    modeButtons.forEach(function (button) {
-        if (button.classList.contains('selected')) {
-            selectedButton = button;
-        }
-    })
-    setupBricks(Number(selectedButton.textContent));
-})
 
 function setupBricks(num) {
     header.textContent = "The Memory Game";
