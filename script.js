@@ -28,8 +28,8 @@ var picArray = [
     "url(pics/Jocke.jpg)",
     "url(pics/Kaja.png)",
     "url(pics/Kaja.png)",
-    "url(pics/Pettson.jpg)",
-    "url(pics/Pettson.jpg)",
+    "url(pics/RobotTrainsKay.jpg)",
+    "url(pics/RobotTrainsKay.jpg)",
     "url(pics/Rekku.jpeg)",
     "url(pics/Rekku.jpeg)",
     "url(pics/Riku.jpeg)",
@@ -38,8 +38,8 @@ var picArray = [
     "url(pics/Rolle.png)",
     "url(pics/Samppa.jpg)",
     "url(pics/Samppa.jpg)",
-    "url(pics/Spiderman.jpg)",
-    "url(pics/Spiderman.jpg)",
+    "url(pics/RobotTrainsViktor.png)",
+    "url(pics/RobotTrainsViktor.png)",
     "url(pics/Toma.jpg)",
     "url(pics/Toma.jpg)",
     "url(pics/Vainu.jpeg)",
@@ -112,6 +112,7 @@ for (var i = 0; i < bricks.length; i++) {
                     
                 } if(totalClickedImages === numBricks){
                     header.textContent = `YESSS! You solved the game in ${totalTries/2} tries!`
+                    document.body.backgroundColor = "rgb(190, 190, 36)"
                 }
             }
         }
